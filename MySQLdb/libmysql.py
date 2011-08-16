@@ -44,7 +44,12 @@ MYSQL_INIT_COMMAND = 3
 
 c = None
 # Prefer the higher version, obscure.
-for lib in ["libmysqlclient.so.16", "libmysqlclient.so.15", "mysqlclient", "libmysqlclient.18.dylib"]:
+
+_searchpaths = ["libmysqlclient.so.18", "libmysqlclient.so.16",
+                "libmysqlclient.so.15", "mysqlclient",
+                "libmysqlclient.18.dylib", "libmysqlclient.so"]
+
+for lib in _searchpaths:
     try:
         c = ctypes.CDLL(lib)
     except OSError:
