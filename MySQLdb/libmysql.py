@@ -45,9 +45,11 @@ MYSQL_INIT_COMMAND = 3
 c = None
 # Prefer the higher version, obscure.
 
-_searchpaths = ["libmysqlclient.so.18", "libmysqlclient.so.16",
+_searchpaths = ("libmysqlclient.so.18", "libmysqlclient.so.16",
                 "libmysqlclient.so.15", "mysqlclient",
-                "libmysqlclient.18.dylib", "libmysqlclient.so"]
+                "libmysqlclient.18.dylib", "libmysqlclient.so",
+                "libmysqlclient.16.dylib")
+
 
 for lib in _searchpaths:
     try:
