@@ -58,9 +58,10 @@ class Connection(object):
         self.real_encoders = encoders
         self.real_decoders = decoders
 
-        # MySQLdb compatibility
-        if conv is None:
-            conv = converters.conversions
+        # MySQLdb compatibility.
+        if conv is not None:
+            self.real_decoders = [lambda conn, field: conv.get(field[1])]
+        conv = conv or converters.conversions
         self.encoders = dict(conv.iteritems())
 
         if charset is not None:
