@@ -72,7 +72,7 @@ def timestamp_decoder(value):
     raise NotImplementedError
 
 def str_to_unicode(connection):
-    return lambda value: value.decode(connection.character_set_name())
+    return lambda value: value.decode(connection.character_set_name(), 'replace')
 
 _simple_field_decoders = {
     field_types.TINY: int,
