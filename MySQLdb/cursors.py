@@ -46,7 +46,7 @@ class Cursor(object):
         self.rowcount = -1
 
     def _query(self, query):
-        self._executed = query
+        self._executed = self._last_executed = query
         self.connection._check_closed()
         r = libmysql.c.mysql_real_query(self.connection._db, ctypes.c_char_p(query), len(query))
         if r:
