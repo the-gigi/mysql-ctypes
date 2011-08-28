@@ -302,7 +302,9 @@ class Result(object):
                     break
                 self.rows.append(row)
         if self.row_index >= len(self.rows):
-            return []
+            # MySQLdb compatbility: There are applications checking for tuple
+            #                       instead of empty lists or even an iterator...
+            return ()
         row_end = self.row_index + size
         if row_end >= len(self.rows):
             row_end = len(self.rows)

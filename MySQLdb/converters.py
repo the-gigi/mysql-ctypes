@@ -30,6 +30,7 @@ _simple_field_encoders = {
     int: literal_encoder,
     bool: lambda connection, obj: str(int(obj)),
     unicode: unicode_to_quoted_sql,
+    str: unicode_to_quoted_sql,
     datetime: datetime_encoder,
 }
 
@@ -99,3 +100,7 @@ def fallback_decoder(connection, field):
 DEFAULT_DECODERS = [
     fallback_decoder,
 ]
+
+# MySQLdb compatibility
+conversions = _simple_field_decoders
+conversions.update(_simple_field_encoders)
