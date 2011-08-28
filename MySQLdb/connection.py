@@ -150,7 +150,9 @@ class Connection(object):
         return libmysql.c.mysql_get_server_info(self._db)
 
     def ping(self):
-        return libmysql.c.mysql_ping(self._db)
+        res = libmysql.c.mysql_ping(self._db)
+        if res:
+            self._exception()
 
 def connect(*args, **kwargs):
     return Connection(*args, **kwargs)
