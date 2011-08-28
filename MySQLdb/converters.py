@@ -30,7 +30,7 @@ _simple_field_encoders = {
     int: literal_encoder,
     bool: lambda connection, obj: str(int(obj)),
     unicode: unicode_to_quoted_sql,
-    str: unicode_to_quoted_sql,
+    str: object_to_quoted_sql,
     datetime: datetime_encoder,
 }
 
@@ -71,6 +71,9 @@ def timestamp_decoder(value):
         return datetime_decoder(value)
     raise NotImplementedError
 
+def str_to_unicode(connection):
+    return lambda value: value.decode(connection.character_set_name())
+
 _simple_field_decoders = {
     field_types.TINY: int,
     field_types.SHORT: int,
@@ -94,10 +97,22 @@ _simple_field_decoders = {
     field_types.TIMESTAMP: timestamp_decoder,
 }
 
+_advanced_field_decoders = {
+    field_types.VAR_STRING: str_to_unicode,
+    field_types.STRING: str_to_unicode,
+}
+
+def advanced_decoder(connection, field):
+    param = _advanced_field_decoders.get(field[1])
+    if param:
+        return param(connection)
+
 def fallback_decoder(connection, field):
     return _simple_field_decoders.get(field[1])
 
+
 DEFAULT_DECODERS = [
+    advanced_decoder,
     fallback_decoder,
 ]
 

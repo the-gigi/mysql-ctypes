@@ -60,7 +60,7 @@ class Connection(object):
 
         # MySQLdb compatibility.
         if conv is not None:
-            self.real_decoders = [lambda conn, field: conv.get(field[1])]
+            self.real_decoders.insert(1, lambda conn, field: conv.get(field[1]))
         conv = conv or converters.conversions
         self.encoders = dict(conv.iteritems())
 
