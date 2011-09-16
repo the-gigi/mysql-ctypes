@@ -96,8 +96,7 @@ class Connection(object):
             elif err < 1000:
                 err_cls = self.InternalError
             else:
-                err_cls = self.DatabaseError
-
+                err_cls = self.OperationalError
         raise err_cls(err, libmysql.c.mysql_error(self._db))
 
     @property
