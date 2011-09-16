@@ -21,7 +21,7 @@ class Connection(object):
         error_codes.ROW_IS_REFERENCED_2: "IntegrityError",
     }
 
-    from MySQLdb.exceptions import (Warning, Error, InterfaceError,
+    from MySQLdb.libmysql_exceptions import (Warning, Error, InterfaceError,
         DataError, DatabaseError, OperationalError, IntegrityError,
         InternalError, ProgrammingError, NotSupportedError)
 
