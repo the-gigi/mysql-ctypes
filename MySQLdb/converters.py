@@ -87,6 +87,7 @@ _simple_field_decoders = {
     field_types.DECIMAL: Decimal,
     field_types.NEWDECIMAL: Decimal,
 
+    field_types.LONG_BLOB: str,
     field_types.BLOB: str,
     field_types.VAR_STRING: str,
     field_types.STRING: str,
