@@ -120,3 +120,4 @@ DEFAULT_DECODERS = [
 # MySQLdb compatibility
 conversions = _simple_field_decoders
 conversions.update(_simple_field_encoders)
+Thing2Literal = unicode_to_quoted_sql
